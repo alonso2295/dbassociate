@@ -1,0 +1,20 @@
+resources:
+  pipelines:
+    pipeline_yelp_project:
+      name: pipeline_yelp_project
+      libraries:
+        - glob:
+            include: ../src/Yelp_Project/transformations/**
+      schema: default
+      continuous: false
+      development: false
+      photon: true
+      channel: CURRENT
+      catalog: workspace
+      serverless: true
+      root_path: "../src/Yelp_Project"
+      configuration:
+        catalog: ${var.catalog}
+        bronze_schema: ${var.bronze_schema}
+        silver_schema: ${var.silver_schema}
+        gold_schema: ${var.gold_schema}
