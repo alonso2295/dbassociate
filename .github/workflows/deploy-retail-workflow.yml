@@ -1,0 +1,27 @@
+name: Deploy retail_workflow bundle
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "sesion_10/retail_workflow/**"
+
+defaults:
+  run:
+    working-directory: sesion_10/retail_workflow
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: databricks/setup-cli@main
+
+      - name: Deploy bundle to prod
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        run: databricks bundle deploy --target prod
