@@ -13,6 +13,12 @@ variables:
     description: The catalog to use
   schema:
     description: The schema to use
+  bronze_schema:
+    description: Esquema de bronce
+  silver_schema:
+    description: Esquema silver
+  gold_schema:
+    description: Esquema gold
 
 targets:
   dev:
@@ -27,6 +33,10 @@ targets:
     variables:
       catalog: dbassociate
       schema: ${workspace.current_user.short_name}
+      bronze_schema: bronze_dev
+      silver_schema: silver_dev
+      gold_schema: gold_dev
+      
   prod:
     mode: production
     workspace:
@@ -36,6 +46,9 @@ targets:
     variables:
       catalog: dbassociate
       schema: prod
+      bronze_schema: bronze_prod
+      silver_schema: silver_prod
+      gold_schema: gold_prod
     permissions:
       - user_name: docjmedina@dmclatam.onmicrosoft.com
         level: CAN_MANAGE
